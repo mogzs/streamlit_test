@@ -1,4 +1,6 @@
 python==3.9
+pandas
+numpy
 matplotlib
 matplotlib-venn
 joblib
@@ -11,3 +13,4 @@ streamlit_echarts
 #enum
 requests
 requests-oauthlib
+streamlit==1.16.0
