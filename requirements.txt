@@ -1,4 +1,4 @@
-python==3.9
+python
 pandas
 numpy
 matplotlib
@@ -13,4 +13,4 @@ streamlit_echarts
 #enum
 requests
 requests-oauthlib
-streamlit==1.16.0
+streamlit
