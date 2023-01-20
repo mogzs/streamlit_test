@@ -1,1 +1,1 @@
-# p7_Impl-mentez_un_mod-le_de_scoring_Chiss_Morgane
+# p7_Implémentez_un_modèle_de_scoring_Chiss_Morgane
