@@ -1,1 +1,1 @@
-aesara==2.7.9
+aiohttp==3.8.3
