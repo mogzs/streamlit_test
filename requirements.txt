@@ -8,7 +8,6 @@ seaborn
 cloudpickle
 pickleshare
 lightgbm
-shapely
 streamlit_echarts
 #enum
 requests
