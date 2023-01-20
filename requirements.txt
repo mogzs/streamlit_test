@@ -13,5 +13,4 @@ streamlit_echarts
 #enum
 requests
 requests-oauthlib
-streamlit
-
+streamlit==1.17.0
