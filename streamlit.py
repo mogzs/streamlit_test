@@ -32,7 +32,7 @@ class FamilyStatus(Enum):
 
 def load_model():
         '''loading the trained model'''
-        clf = joblib.load(open('/home/mogzs/openclassroom/p7/clf_0.pkl','rb'))
+        clf = joblib.load(open('clf_0.pkl','rb'))
         return clf
     
 clf = load_model()
