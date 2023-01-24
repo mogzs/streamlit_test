@@ -17,8 +17,6 @@ import joblib
 #Chargement du dataframe et du modèle
 model = joblib.load(open('clf_0.pkl','rb'))
 data = pd.read_csv("data_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
-# data = data.drop(["index"], axis=1)
-#target = data.iloc[:, -1:]
 
 
 class Gender(Enum):
@@ -41,11 +39,12 @@ clf = load_model()
 @st.cache
 def load_infos_gen(data):
     nb_credits = data.shape[0]
-    rev_moy = round(data["AMT_INCOME_TOTAL"].mean(),2)
+    #rev_moy = round(data["AMT_INCOME_TOTAL"].mean(),2)
     credits_moy = round(data["AMT_CREDIT"].mean(), 2)
     targets = data.TARGET.value_counts()
 
-    return nb_credits, rev_moy, credits_moy, targets
+    return nb_credits, credits_moy, targets
+    #rev_moy, 
 
 #Récupération de l'identifiant client 
 def identite_client(data, id):
@@ -59,11 +58,11 @@ def load_age_population(data):
     return data_age
 
 #Récupération du revenu de la population de l'échantillon 
-@st.cache
-def load_income_population(data):
-    df_income = pd.DataFrame(data["AMT_INCOME_TOTAL"])
-    df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
-    return df_income
+#@st.cache
+#def load_income_population(data):
+#    df_income = pd.DataFrame(data["AMT_INCOME_TOTAL"])
+#    df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
+#    return df_income
 
 #Récupération du crédit de la population de l'échantillon 
 @st.cache
@@ -72,23 +71,22 @@ def load_amt_credit_population(data):
     return amt_credit_pop
 
 #Récupération des défauts de paiement de la population de l'échantillon 
-@st.cache
-def load_obs_defaultpayment_population(data):
-    obs_def_payment_pop = pd.DataFrame(data["OBS_30_CNT_SOCIAL_CIRCLE"])
-    return obs_def_payment_pop
+#@st.cache
+#def load_obs_defaultpayment_population(data):
+#    obs_def_payment_pop = pd.DataFrame(data["OBS_30_CNT_SOCIAL_CIRCLE"])
+#    return obs_def_payment_pop
 
-#Récupération des taux de paiment de la population de l'échantillon 
-@st.cache
-def load_payment_rate_population(data):
-    payment_rate_pop = pd.DataFrame(data["PAYMENT_RATE"])
-    return payment_rate_pop
+#Récupération des taux de paiement de la population de l'échantillon 
+#@st.cache
+#def load_payment_rate_population(data):
+#    payment_rate_pop = pd.DataFrame(data["PAYMENT_RATE"])
+#    return payment_rate_pop
 
 #Récupération de la prédiction du crédit pour les clients 
 @st.cache
 def load_prediction(data, id, clf):
-    X=data.iloc[:, :-1]
-    score = clf.predict_proba(X[X.index == int(id)])[:,1]
-    return score
+    score = clf.predict(X[X.index == id])
+    return float(score)
 
 
 #Chargement de l'identifiant client 
@@ -172,23 +170,24 @@ with st.expander("Customer information display"):
         st.pyplot(fig)
 
 
-        st.subheader("*Income - Credit - Default payment - Payment rate*")
-        client_income = infos_client.iloc[0]['AMT_INCOME_TOTAL']
+        st.subheader("*Income - Default payment - Payment rate*")
+        #- Credit
+        #client_income = infos_client.iloc[0]['AMT_INCOME_TOTAL']
         client_credit = infos_client.iloc[0]['AMT_CREDIT']
         client_annuity = infos_client.iloc[0]['AMT_ANNUITY']
         client_property_credit = infos_client.iloc[0]['AMT_GOODS_PRICE']
-        st.write("**Income total :**", round(client_income))
+        #st.write("**Income total :**", round(client_income))
         st.write("**Credit amount :**", round(client_credit))
         st.write("**Credit annuities :**", round(client_annuity))
         st.write("**Amount of property for credit :**", round(client_property_credit))
 
         #Distribution par revenus
-        data_income = load_income_population(data)
-        fig, ax = plt.subplots(figsize=(10, 5))
-        sns.histplot(data_income["AMT_INCOME_TOTAL"], edgecolor = 'k', color="teal", bins=20)
-        ax.axvline(int(client_income), color="green", linestyle='--')
-        ax.set(title='Customer income', xlabel='Income (USD)', ylabel='')
-        st.pyplot(fig)
+        #data_income = load_income_population(data)
+        #fig, ax = plt.subplots(figsize=(10, 5))
+        #sns.histplot(data_income["AMT_INCOME_TOTAL"], edgecolor = 'k', color="teal", bins=20)
+        #ax.axvline(int(client_income), color="green", linestyle='--')
+        #ax.set(title='Customer income', xlabel='Income (USD)', ylabel='')
+        #st.pyplot(fig)
 
         #Distribution des crédits demandés dans l'échantillon 
         data_amt_credit = load_amt_credit_population(data)
@@ -200,22 +199,22 @@ with st.expander("Customer information display"):
         st.pyplot(fig)
 
         #Distribution des défauts de paiements sur 30 jours dans l'échantillon 
-        data_defpayment = load_obs_defaultpayment_population(data)
-        client_defpayment = infos_client.iloc[0]['OBS_30_CNT_SOCIAL_CIRCLE']
-        fig, ax = plt.subplots(figsize=(10, 5))
-        sns.histplot(data_defpayment["OBS_30_CNT_SOCIAL_CIRCLE"], edgecolor = 'k', color="teal", bins=20)
-        ax.axvline(int(client_defpayment), color="green", linestyle='--')
-        ax.set(title='Customer default payment', xlabel='Number of default payment (on 30 days)', ylabel='')
-        st.pyplot(fig)
+        #data_defpayment = load_obs_defaultpayment_population(data)
+        #client_defpayment = infos_client.iloc[0]['OBS_30_CNT_SOCIAL_CIRCLE']
+        #fig, ax = plt.subplots(figsize=(10, 5))
+        #sns.histplot(data_defpayment["OBS_30_CNT_SOCIAL_CIRCLE"], edgecolor = 'k', color="teal", bins=20)
+        #ax.axvline(int(client_defpayment), color="green", linestyle='--')
+        #ax.set(title='Customer default payment', xlabel='Number of default payment (on 30 days)', ylabel='')
+        #st.pyplot(fig)
         
         #Distribution des taux de paiement ("payment_rate") dans l'échantillon 
-        data_payment_rate = load_payment_rate_population(data)
-        client_payment_rate = infos_client.iloc[0]['PAYMENT_RATE']
-        fig, ax = plt.subplots(figsize=(10, 5))
-        sns.histplot(data_payment_rate["PAYMENT_RATE"], edgecolor = 'k', color="teal", bins=20)
-        ax.axvline((client_payment_rate), color="green", linestyle='--')
-        ax.set(title='Customer payment rate', xlabel='Payment rate', ylabel='')
-        st.pyplot(fig)
+        #data_payment_rate = load_payment_rate_population(data)
+        #client_payment_rate = infos_client.iloc[0]['PAYMENT_RATE']
+        #fig, ax = plt.subplots(figsize=(10, 5))
+        #sns.histplot(data_payment_rate["PAYMENT_RATE"], edgecolor = 'k', color="teal", bins=20)
+        #ax.axvline((client_payment_rate), color="green", linestyle='--')
+        #ax.set(title='Customer payment rate', xlabel='Payment rate', ylabel='')
+        #st.pyplot(fig)
 
         
 #Customer probability repayment display
