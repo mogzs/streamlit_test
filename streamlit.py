@@ -12,7 +12,7 @@ import plotly.graph_objects as go
 from streamlit_echarts import st_echarts
 from enum import Enum
 import requests
-mport joblib
+import joblib
 
 #Chargement du dataframe et du modèle
 model = joblib.open('clf_0.pkl','rb'))
