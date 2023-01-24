@@ -15,7 +15,7 @@ import requests
 import joblib
 
 #Chargement du dataframe et du modèle
-model = joblib.open('clf_0.pkl','rb'))
+model = joblib.open('clf_0.pkl','rb')
 data = pd.read_csv("data_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
 # data = data.drop(["index"], axis=1)
 #target = data.iloc[:, -1:]
