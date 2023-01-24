@@ -43,7 +43,7 @@ def load_infos_gen(data):
     credits_moy = round(data["AMT_CREDIT"].mean(), 2)
     #targets = data.TARGET.value_counts()
 
-    return nb_credits, credits_moy, targets
+    return nb_credits, credits_moy#, targets
     #rev_moy, 
 
 #Récupération de l'identifiant client 
