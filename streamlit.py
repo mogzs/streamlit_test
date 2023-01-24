@@ -86,7 +86,7 @@ def load_amt_credit_population(data):
 #Récupération de la prédiction du crédit pour les clients 
 @st.cache
 def load_prediction(data, id, clf):
-    score = clf.predict(X[X.index == id])
+    score = clf.predict(data[data.index == id])
     return float(score)
 
 
