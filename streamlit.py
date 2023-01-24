@@ -118,8 +118,8 @@ st.sidebar.markdown("<u>Number of loans in the sample :</u>", unsafe_allow_html=
 st.sidebar.text(nb_credits)
 
 #Revenu moyen des clients dans l'échantillon 
-st.sidebar.markdown("<u>Average income (USD) :</u>", unsafe_allow_html=True)
-st.sidebar.text(rev_moy)
+#st.sidebar.markdown("<u>Average income (USD) :</u>", unsafe_allow_html=True)
+#st.sidebar.text(rev_moy)
 
 #Crédit moyen des clients dans l'échantillon 
 st.sidebar.markdown("<u>Average loan amount (USD) :</u>", unsafe_allow_html=True)
