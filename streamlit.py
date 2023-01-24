@@ -110,7 +110,8 @@ st.sidebar.header("**General Information**")
 chk_id = st.sidebar.selectbox("Client ID", id_client)
 
 #Chargement des informations générales 
-nb_credits, rev_moy, credits_moy, targets = load_infos_gen(data)
+nb_credits, credits_moy = load_infos_gen(data)
+#rev_moy, , targets
 
 #Nombre total de crédits de l'échantillon 
 st.sidebar.markdown("<u>Number of loans in the sample :</u>", unsafe_allow_html=True)
