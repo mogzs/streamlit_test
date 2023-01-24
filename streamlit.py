@@ -225,7 +225,7 @@ with st.expander('Credit default probability'):
     infos_client = identite_client(data, chk_id)
     #client_target = infos_client.iloc[0]['TARGET']
     #prediction = load_prediction(data, chk_id, clf)
-    prediction = requests.post('http://localhost:8000/predict?id=' + str(int(chk_id)))
+    prediction = requests.get('http://localhost:8000/predict?id=' + str(int(chk_id)))
     score = prediction.json()['score']
     
     formatted_score = round(float(score)*100, 2)
