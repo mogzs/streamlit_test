@@ -7,7 +7,7 @@ import plotly.express as px
 import seaborn as sns 
 import pickle
 from lightgbm import LGBMClassifier
-import shap 
+import shapely 
 import plotly.graph_objects as go
 from streamlit_echarts import st_echarts
 from enum import Enum
