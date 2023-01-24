@@ -139,12 +139,12 @@ st.sidebar.text(credits_moy)
 st.markdown("<h1 style='text-align: center; color: white; font-size: 20px;'>Features importance global for consumer credit prediction</h1>", unsafe_allow_html=True)
 
 #Features Importance global 
-X = data.iloc[:, :-1]
-fig, ax = plt.subplots(figsize=(10, 10))
-explainer = shap.TreeExplainer(load_model())
-shap_values = explainer.shap_values(X)
-shap.summary_plot(shap_values[0], X, color_bar=False, plot_size=(5, 5))
-st.pyplot(fig)
+#X = data.iloc[:, :-1]
+#fig, ax = plt.subplots(figsize=(10, 10))
+#explainer = shap.TreeExplainer(load_model())
+#shap_values = explainer.shap_values(X)
+#shap.summary_plot(shap_values[0], X, color_bar=False, plot_size=(5, 5))
+#st.pyplot(fig)
 
 
 
