@@ -13,6 +13,7 @@ from streamlit_echarts import st_echarts
 from enum import Enum
 import requests
 import joblib
+import shap
 
 #Chargement du dataframe et du modèle
 model = joblib.load(open('clf_0.pkl','rb'))
