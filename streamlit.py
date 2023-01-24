@@ -127,10 +127,10 @@ st.sidebar.text(credits_moy)
 
 #PieChart concernant le nombre de crédits acceptés et refusés dans l'échantillon 
 #st.sidebar.markdown("<u>......</u>", unsafe_allow_html=True)
-fig, ax = plt.subplots(figsize=(3,3))
-plt.pie(targets, explode=[0, 0.1], labels=['No default', 'Default'], autopct='%1.1f%%', startangle=90)
-plt.title("Customer creditworthiness chart", fontweight = 'bold')
-st.sidebar.pyplot(fig)
+#fig, ax = plt.subplots(figsize=(3,3))
+#plt.pie(targets, explode=[0, 0.1], labels=['No default', 'Default'], autopct='%1.1f%%', startangle=90)
+#plt.title("Customer creditworthiness chart", fontweight = 'bold')
+#st.sidebar.pyplot(fig)
 
 
 
