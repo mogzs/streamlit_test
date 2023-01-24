@@ -41,7 +41,7 @@ def load_infos_gen(data):
     nb_credits = data.shape[0]
     #rev_moy = round(data["AMT_INCOME_TOTAL"].mean(),2)
     credits_moy = round(data["AMT_CREDIT"].mean(), 2)
-    targets = data.TARGET.value_counts()
+    #targets = data.TARGET.value_counts()
 
     return nb_credits, credits_moy, targets
     #rev_moy, 
