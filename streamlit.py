@@ -12,10 +12,11 @@ import plotly.graph_objects as go
 from streamlit_echarts import st_echarts
 from enum import Enum
 import requests
+mport joblib
 
 #Chargement du dataframe et du modèle
-model = joblib.load(open('/home/mogzs/openclassroom/p7/clf_0.pkl','rb'))
-data = pd.read_csv("/home/mogzs/openclassroom/p7/data_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
+model = joblib.open('clf_0.pkl','rb'))
+data = pd.read_csv("data_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
 # data = data.drop(["index"], axis=1)
 #target = data.iloc[:, -1:]
 
