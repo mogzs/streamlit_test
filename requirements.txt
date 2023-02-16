@@ -1,16 +1,2 @@
 pandas
-numpy
-matplotlib
-matplotlib-venn
-joblib
-plotly
-seaborn
-cloudpickle
-pickleshare
-lightgbm
-streamlit_echarts
-#enum
-requests
-requests-oauthlib
-shapely
 streamlit
