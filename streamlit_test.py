@@ -17,7 +17,7 @@ import shap
 
 #Chargement du dataframe et du modèle
 #model = joblib.load(open('clf_0.pkl','rb'))
-data = pd.read_csv("/home/mogzs/openclassroom/p7/X_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
+data = pd.read_csv("./X_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
 
 
 class Gender(Enum):
@@ -31,7 +31,7 @@ class FamilyStatus(Enum):
 
 def load_model():
         '''loading the trained model'''
-        clf = joblib.load(open('/home/mogzs/openclassroom/p7/clf_0.pkl','rb'))
+        clf = joblib.load(open('./clf_0.pkl','rb'))
         return clf
     
 clf = load_model()
@@ -51,6 +51,12 @@ def load_infos_gen(data):
 def identite_client(data, id):
     data_client = data[data.index == int(id)]
     return data_client
+
+
+# Récupération de la prédiction du crédit pour les clients 
+def load_prediction(X, id, clf):
+    score = clf.predict(X[X.index == id])
+    return float(score)
 
 #Récupération de l'âge de la population de l'échantillon 
 @st.cache
@@ -224,9 +230,11 @@ with st.expander('Credit default probability'):
     infos_client = identite_client(data, chk_id)
     #client_target = infos_client.iloc[0]['TARGET']
     #prediction = load_prediction(data, chk_id, clf)
-    prediction = requests.get('http://localhost:8000/predict?id=' + str(int(chk_id)))
+    prediction = load_prediction(data, chk_id, clf)
+    
+   # equests.get('http://localhost:8000/predict?id=' + str(int(chk_id)))
     st.write(prediction)
-    score = prediction.json()
+    score = prediction
     #score = prediction.json()['score']
     
     #formatted_score = round(float(score)*100, 2)
