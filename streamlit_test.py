@@ -37,7 +37,7 @@ def load_model():
 clf = load_model()
     
 #Récupération des informations générales clients 
-@st.cache
+@st.cache_data
 def load_infos_gen(data):
     nb_credits = data.shape[0]
     rev_moy = round(data["AMT_INCOME_TOTAL"].mean(),2)
@@ -59,20 +59,20 @@ def load_prediction(X, id, clf):
     return float(score)
 
 #Récupération de l'âge de la population de l'échantillon 
-@st.cache
+@st.cache_data
 def load_age_population(data):
     data_age = round((data["DAYS_BIRTH"]/-365), 2)
     return data_age
 
 #Récupération du revenu de la population de l'échantillon 
-@st.cache
+@st.cache_data
 def load_income_population(data):
     df_income = pd.DataFrame(data["AMT_INCOME_TOTAL"])
     df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
     return df_income
 
 #Récupération du crédit de la population de l'échantillon 
-@st.cache
+@st.cache_data
 def load_amt_credit_population(data):
     amt_credit_pop = pd.DataFrame(data["AMT_CREDIT"])
     return amt_credit_pop
@@ -90,7 +90,7 @@ def load_amt_credit_population(data):
 #    return payment_rate_pop
 
 #Récupération de la prédiction du crédit pour les clients 
-@st.cache
+@st.cache_resource
 def load_prediction(data, id, clf):
     score = clf.predict(data[data.index == id])
     return float(score)
