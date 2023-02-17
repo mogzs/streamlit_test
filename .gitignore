@@ -1,8 +1,6 @@
 *.csv
-*.pkl
 test.py
 streamlit.py
-requirement.txt
 X_test.zip
 p7
 __pycache__
