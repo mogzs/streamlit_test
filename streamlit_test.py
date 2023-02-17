@@ -14,6 +14,7 @@ from enum import Enum
 import requests
 import joblib
 import shap
+from PIL import Image
 
 #Chargement du dataframe et du modèle
 #model = joblib.load(open('clf_0.pkl','rb'))
@@ -90,11 +91,11 @@ def load_amt_credit_population(data):
 #    return payment_rate_pop
 
 #Récupération de la prédiction du crédit pour les clients 
-@st.cache_resource
-def load_prediction(data, id, clf):
+@st.cache_data
+def load_prediction(data, id, _clf):
+    _clf = clf
     score = clf.predict(data[data.index == id])
     return float(score)
-
 
 #Chargement de l'identifiant client 
 id_client = data.index.values
@@ -145,12 +146,15 @@ st.sidebar.text(credits_moy)
 st.markdown("<h1 style='text-align: center; color: white; font-size: 20px;'>Features importance global for consumer credit prediction</h1>", unsafe_allow_html=True)
 
 #Features Importance global 
-X = data#.iloc[:, :-1]
-fig, ax = plt.subplots(figsize=(10, 10))
-explainer = shap.TreeExplainer(load_model())
-shap_values = explainer.shap_values(X)
-shap.summary_plot(shap_values[0], X, color_bar=False, plot_size=(5, 5))
-st.pyplot(fig)
+image = Image.open('features_importance_global.png')
+st.image(image)
+
+#X = data#.iloc[:, :-1]
+#fig, ax = plt.subplots(figsize=(10, 10))
+#explainer = shap.TreeExplainer(load_model())
+#shap_values = explainer.shap_values(X)
+#shap.summary_plot(shap_values[0], X, color_bar=False, plot_size=(5, 5))
+#st.pyplot(fig)
 
 
 
