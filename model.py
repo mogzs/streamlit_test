@@ -20,7 +20,7 @@ app = FastAPI()
 
 
 # Prérequis API (data + model + fonction de prédiction)
-X = pd.read_csv("/home/mogzs/openclassroom/p7/data_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
+X = pd.read_csv("/home/mogzs/openclassroom/p7/X_test.csv", index_col='SK_ID_CURR', encoding ='utf-8')
 
 def load_model():
         '''loading the trained model'''
@@ -45,8 +45,7 @@ def read_items(id: int):
  #   if id < 100002 or id > 123325:
  #       return 'id client inconnu'
     score = load_prediction(X, id, clf)
-    
-    return float(score)
+    return score
     #return {'score': score}
 
 # Exécuter l'API avec uvicorn
