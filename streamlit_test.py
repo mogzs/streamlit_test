@@ -57,7 +57,7 @@ def identite_client(data, id):
 # Récupération de la prédiction du crédit pour les clients 
 def load_prediction(X, id, clf):
     score = clf.predict_proba(X[X.index == id])
-    return float(score[0])
+    return score[0].astype(float)
 
 #Récupération de l'âge de la population de l'échantillon 
 @st.cache_data
@@ -95,7 +95,7 @@ def load_amt_credit_population(data):
 def load_prediction(data, id, _clf):
     _clf = clf
     score = clf.predict_proba(data[data.index == id])
-    return float(score[0])
+    return score[0].astype(float)
 
 #Chargement de l'identifiant client 
 id_client = data.index.values
