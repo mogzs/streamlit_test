@@ -94,7 +94,7 @@ def load_amt_credit_population(data):
 @st.cache_data
 def load_prediction(data, id, _clf):
     _clf = clf
-    score = clf.predict_proba(data[data.index == id])
+    score = clf.predict(data[data.index == id])
     return float(score)
 
 #Chargement de l'identifiant client 
