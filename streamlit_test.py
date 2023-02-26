@@ -237,18 +237,18 @@ with st.expander('Credit default probability'):
     prediction = load_prediction(data, chk_id, clf)
     
    # equests.get('http://localhost:8000/predict?id=' + str(int(chk_id)))
-    st.write(prediction)
-    score = prediction
+   # st.write(prediction)
+    score = round(prediction*100,2)
     #score = prediction.json()['score']
     
     #formatted_score = round(float(score)*100, 2)
     #formatted_prediction = round(float(prediction)*100, 2)
     #st.write("**Your credit default probability is :** {:.0f} %".format(formatted_prediction))
-    st.write("**Your credit default probability is :**",score)
+    st.write("**Your credit default probability is :** {:.0f} %".format(score))
     
     #if client_target == 1.0 :
     #if score >= 0.275:
-    if score >= 0.5:
+    if score <= 50:
         st.error('Your credit application has been rejected! Please contact customer support for more information.', icon="❌")
     else : 
         st.success('Congratulations! Your credit application has been accepted!', icon="✅")
